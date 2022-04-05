@@ -1,3 +1,5 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '';import 'package:flutter/material.dart';
 import '../screens/screens.dart';
 
@@ -11,7 +13,7 @@ class CustomNavBar extends StatelessWidget {
     return BottomAppBar(
       color: Colors.black,
       child: Container(
-        height: 70,
+        height: 70.h,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [

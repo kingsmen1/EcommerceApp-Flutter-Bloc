@@ -1,5 +1,6 @@
 import 'package:block_eccomerce_app/screens/screens.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomAppBar extends StatelessWidget with PreferredSizeWidget{
 
@@ -14,21 +15,21 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget{
       backgroundColor: Colors.transparent,
       elevation: 0,
       title: Container(
-        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
         color: Colors.black,
         child:  Text(
           title,
           style: Theme.of(context).textTheme.headline2!.copyWith(color: Colors.white)
         ),
       ),
-      iconTheme:IconThemeData(color: Colors.black),
+      iconTheme:const IconThemeData(color: Colors.black),
       centerTitle: true,
       actions: [
         IconButton(
             onPressed: () {
               Navigator.pushNamed(context, WishlistScreen.routeName);
             },
-            icon: Icon(
+            icon:const  Icon(
               Icons.favorite,
             ))
       ],

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 ThemeData theme(){
   return ThemeData(
@@ -10,37 +11,37 @@ ThemeData theme(){
 }
 
 TextTheme textTheme() {
-  return const TextTheme(
+  return  TextTheme(
     headline1: TextStyle(
-      fontSize: 32,
+      fontSize: 32.sp,
       fontWeight: FontWeight.bold,
       color: Colors.black,
     ),headline2: TextStyle(
-      fontSize: 24,
+      fontSize: 24.sp,
       fontWeight: FontWeight.bold,
       color: Colors.black,
     ),headline3: TextStyle(
-      fontSize: 18,
+      fontSize: 18.sp,
       fontWeight: FontWeight.bold,
       color: Colors.black,
     ),headline4: TextStyle(
-      fontSize: 16,
+      fontSize: 16.sp,
       fontWeight: FontWeight.bold,
       color: Colors.black,
     ),headline5: TextStyle(
-      fontSize: 14,
+      fontSize: 14.sp,
       fontWeight: FontWeight.bold,
       color: Colors.black,
     ),headline6: TextStyle(
-      fontSize: 14,
+      fontSize: 14.sp,
       fontWeight: FontWeight.normal,
       color: Colors.black,
     ),bodyText1: TextStyle(
-      fontSize: 12,
+      fontSize: 12.sp,
       fontWeight: FontWeight.normal,
       color: Colors.black,
     ),bodyText2: TextStyle(
-      fontSize: 10,
+      fontSize: 10.sp,
       fontWeight: FontWeight.normal,
       color: Colors.black,
     ),
