@@ -6,16 +6,18 @@ import '../models/models.dart';
 
 class ProductCard extends StatelessWidget {
   final Product product;
+  final double widthFactor;
   const ProductCard({
-    Key? key,required this.product,
+    Key? key,required this.product, required this.widthFactor,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final double widthValue = MediaQuery.of(context).size.width / widthFactor;
     return Stack(
       children: [
         Container(
-          width: ScreenUtil().screenWidth / 2.5,
+          width:widthValue,
           height: 150.h,
           child: Image.network(
             product.imageUrl,
@@ -26,7 +28,7 @@ class ProductCard extends StatelessWidget {
             top: 60.h,
             //left: 5.w,
             child: Container(
-              width: ScreenUtil().screenWidth / 2.5,
+              width:widthValue,
               height: 80.h,
               decoration:
               BoxDecoration(color: Colors.black.withAlpha(50)),
@@ -35,7 +37,7 @@ class ProductCard extends StatelessWidget {
           top: 65.h,
           left: 5.w,
           child: Container(
-            width: ScreenUtil().screenWidth / 2.5 - 10,
+            width: widthValue - 10,
             height: 70.h,
             decoration: const BoxDecoration(color: Colors.black),
             child: Padding(
