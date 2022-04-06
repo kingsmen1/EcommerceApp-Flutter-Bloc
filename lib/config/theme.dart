@@ -13,11 +13,11 @@ ThemeData theme(){
 TextTheme textTheme() {
   return  TextTheme(
     headline1: TextStyle(
-      fontSize: 32.sp,
+      fontSize: 36.sp,
       fontWeight: FontWeight.bold,
       color: Colors.black,
     ),headline2: TextStyle(
-      fontSize: 24.sp,
+      fontSize: 22.sp,
       fontWeight: FontWeight.bold,
       color: Colors.black,
     ),headline3: TextStyle(

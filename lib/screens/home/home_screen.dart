@@ -15,39 +15,37 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
         appBar: const CustomAppBar(title: 'Zero to  Unicorn'),
         bottomNavigationBar: const CustomNavBar(),
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              CarouselSlider(
-                options: CarouselOptions(
-                  aspectRatio: 1.5,
-                  viewportFraction: 0.9,
-                  enlargeCenterPage: true,
-                  enableInfiniteScroll: true,
-                  enlargeStrategy: CenterPageEnlargeStrategy.height,
-                  initialPage: 2,
-                  autoPlay: true,
-                ),
-                items: Category.categories
-                    .map((category) => HeroCarouselCard(category: category))
-                    .toList(),
+        body: ListView(
+          children: [
+            CarouselSlider(
+              options: CarouselOptions(
+                aspectRatio: 1.5,
+                viewportFraction: 0.9,
+                enlargeCenterPage: true,
+                enableInfiniteScroll: true,
+                enlargeStrategy: CenterPageEnlargeStrategy.height,
+                initialPage: 2,
+                autoPlay: true,
               ),
-              const SectionTile(
-                title: 'RECOMMENDED ',
-              ),
-              ProductCarousel(
-                  products: Product.products
-                      .where((element) => element.isRecommended)
-                      .toList()),
-              const SectionTile(
-                title: 'MOST POPULAR ',
-              ),
-              ProductCarousel(
-                  products: Product.products
-                      .where((element) => element.isPopular)
-                      .toList()),
-            ],
-          ),
+              items: Category.categories
+                  .map((category) => HeroCarouselCard(category: category))
+                  .toList(),
+            ),
+            const SectionTile(
+              title: 'RECOMMENDED ',
+            ),
+            ProductCarousel(
+                products: Product.products
+                    .where((element) => element.isRecommended)
+                    .toList()),
+            const SectionTile(
+              title: 'MOST POPULAR ',
+            ),
+            ProductCarousel(
+                products: Product.products
+                    .where((element) => element.isPopular)
+                    .toList()),
+          ],
         ));
   }
 }
