@@ -1,7 +1,9 @@
+import 'package:block_eccomerce_app/blocs/wishlist/wishlist_bloc.dart';
 import 'package:block_eccomerce_app/models/models.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:block_eccomerce_app/widgets/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ProductScreen extends StatelessWidget {
@@ -21,12 +23,38 @@ class ProductScreen extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              IconButton(onPressed: () {}, icon: Icon(Icons.share , color: Colors.white,)),
-              IconButton(onPressed: () {}, icon: Icon(Icons.favorite , color: Colors.white,)),
+              IconButton(
+                  onPressed: () {},
+                  icon: Icon(
+                    Icons.share,
+                    color: Colors.white,
+                  )),
+              BlocBuilder<WishlistBloc, WishlistState>(
+                builder: (context, state) {
+                  return IconButton(
+                      onPressed: () {
+                        context
+                            .read<WishlistBloc>()
+                            .add(AddProductToWishList(product));
+                        const snackBar = SnackBar(
+                          content: Text('Added to your Wishlist'),
+                          duration: Duration(milliseconds: 300),
+                        );
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      },
+                      icon: const Icon(
+                        Icons.favorite,
+                        color: Colors.white,
+                      ));
+                },
+              ),
               ElevatedButton(
                   style: ElevatedButton.styleFrom(primary: Colors.white),
                   onPressed: () {},
-                  child: Text('Add To Cart' , style: Theme.of(context).textTheme.headline3,))
+                  child: Text(
+                    'Add To Cart',
+                    style: Theme.of(context).textTheme.headline3,
+                  ))
             ],
           ),
         ),

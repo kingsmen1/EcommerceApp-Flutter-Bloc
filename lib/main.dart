@@ -1,8 +1,10 @@
+import 'package:block_eccomerce_app/blocs/wishlist/wishlist_bloc.dart';
 import 'package:block_eccomerce_app/config/routes.dart';
 import 'package:block_eccomerce_app/config/theme.dart';
 import 'package:block_eccomerce_app/screens/home/home_screen.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void main() {
@@ -17,13 +19,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       designSize: const Size(390 ,844),
-      builder:()=> MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
-        theme: theme(),
-        //initialRoute: HomeScreen.routeName,
-        routes: routes,
-        home:   HomeScreen(),
+      builder:()=> MultiBlocProvider(
+        providers: [BlocProvider(create: (_)=> WishlistBloc()..add(LoadWishList()))],
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'Flutter Demo',
+          theme: theme(),
+          //initialRoute: HomeScreen.routeName,
+          routes: routes,
+          home:   HomeScreen(),
+        ),
       ),
     );
   }
