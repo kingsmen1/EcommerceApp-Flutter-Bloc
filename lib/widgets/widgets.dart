@@ -5,3 +5,4 @@ export 'section_tile.dart';
 export 'product_card.dart';
 export 'product_carousel.dart';
 export 'cart_product_card.dart';
+export 'total_cart.dart';
