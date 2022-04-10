@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:block_eccomerce_app/widgets/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../models/cart_model.dart';
 import '../../models/product_model.dart';
 
 class CartScreen extends StatelessWidget {
@@ -13,7 +14,7 @@ class CartScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: const CustomAppBar(title: 'Cart'),
-        bottomNavigationBar:BottomAppBar(
+        bottomNavigationBar: BottomAppBar(
           child: Container(
             color: Colors.black,
             height: 70.h,
@@ -42,7 +43,7 @@ class CartScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Add \$20.0 for FREE delivery',
+                        Cart().freeDeliveryString,
                         style: Theme.of(context).textTheme.headline5,
                       ),
                       ElevatedButton(
@@ -66,18 +67,20 @@ class CartScreen extends StatelessWidget {
                   SizedBox(
                     height: 10.h,
                   ),
-                  CartProductCard(product: Product.products[0]),
-                  CartProductCard(product: Product.products[1]),
-                  CartProductCard(product: Product.products[0]),
-                  CartProductCard(product: Product.products[1]),
+                  SizedBox(
+                      height: 420.h,
+                      child: ListView.builder(itemCount: Cart.products.length,
+                          itemBuilder: (context, index) => CartProductCard(
+                              product: Cart.products[index]))),
+
                 ],
               ),
               Column(
                 children: [
                   const Divider(thickness: 2),
                   Padding(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: 40.w, vertical: 10.h),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 40.w, vertical: 10.h),
                     child: Column(
                       children: [
                         Row(
@@ -87,7 +90,7 @@ class CartScreen extends StatelessWidget {
                               'SUBTOTAL',
                               style: Theme.of(context).textTheme.headline5,
                             ),
-                            Text('\$5.98',
+                            Text('\$${Cart().subtotal}',
                                 style: Theme.of(context).textTheme.headline5)
                           ],
                         ),
@@ -101,7 +104,7 @@ class CartScreen extends StatelessWidget {
                               'DELIVERY FEE',
                               style: Theme.of(context).textTheme.headline5,
                             ),
-                            Text('\$2.98',
+                            Text('\$${Cart().deliverFee}',
                                 style: Theme.of(context).textTheme.headline5)
                           ],
                         ),
@@ -134,7 +137,7 @@ class CartScreen extends StatelessWidget {
                                     .headline5!
                                     .copyWith(color: Colors.white),
                               ),
-                              Text('\$12.98',
+                              Text('\$${Cart().total}',
                                   style: Theme.of(context)
                                       .textTheme
                                       .headline5!
