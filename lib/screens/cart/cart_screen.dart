@@ -4,9 +4,6 @@ import 'package:block_eccomerce_app/widgets/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../models/cart_model.dart';
-import '../../models/product_model.dart';
-
 class CartScreen extends StatelessWidget {
   const CartScreen({Key? key}) : super(key: key);
 
@@ -41,7 +38,7 @@ class CartScreen extends StatelessWidget {
                 child: CircularProgressIndicator(),
               );
             }
-            if (state is CartLoaded){
+            if (state is CartLoaded) {
               return Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
                 child: Column(
@@ -80,42 +77,60 @@ class CartScreen extends StatelessWidget {
                         SizedBox(
                             height: 420.h,
                             child: ListView.builder(
-                                itemCount: state.cart.products.length,
-                                itemBuilder: (context, index) => CartProductCard(
-                                    product: state.cart.products[index]))),
+                                itemCount: state.cart
+                                    .productQuantity(state.cart.products)
+                                    .keys
+                                    .length,
+                                itemBuilder: (context, index) =>
+                                    CartProductCard(
+                                      product: state.cart
+                                          .productQuantity(state.cart.products)
+                                          .keys
+                                          .elementAt(index),
+                                      quantity: state.cart
+                                          .productQuantity(state.cart.products)
+                                          .values
+                                          .elementAt(index),
+                                    ))),
                       ],
                     ),
                     Column(
                       children: [
                         const Divider(thickness: 2),
                         Padding(
-                          padding:
-                          EdgeInsets.symmetric(horizontal: 40.w, vertical: 10.h),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 40.w, vertical: 10.h),
                           child: Column(
                             children: [
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
                                     'SUBTOTAL',
-                                    style: Theme.of(context).textTheme.headline5,
+                                    style:
+                                        Theme.of(context).textTheme.headline5,
                                   ),
                                   Text('\$${state.cart.subtotal}',
-                                      style: Theme.of(context).textTheme.headline5)
+                                      style:
+                                          Theme.of(context).textTheme.headline5)
                                 ],
                               ),
                               SizedBox(
                                 height: 10.h,
                               ),
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
                                     'DELIVERY FEE',
-                                    style: Theme.of(context).textTheme.headline5,
+                                    style:
+                                        Theme.of(context).textTheme.headline5,
                                   ),
                                   Text('\$${state.cart.deliverFee}',
-                                      style: Theme.of(context).textTheme.headline5)
+                                      style:
+                                          Theme.of(context).textTheme.headline5)
                                 ],
                               ),
                             ],
@@ -126,19 +141,21 @@ class CartScreen extends StatelessWidget {
                             Container(
                               width: ScreenUtil().screenWidth,
                               height: 60.h,
-                              decoration:
-                              BoxDecoration(color: Colors.black.withAlpha(50)),
+                              decoration: BoxDecoration(
+                                  color: Colors.black.withAlpha(50)),
                             ),
                             Container(
                               width: ScreenUtil().screenWidth,
                               margin: EdgeInsets.symmetric(
                                   horizontal: 5.w, vertical: 5.h),
                               height: 50.h,
-                              decoration: const BoxDecoration(color: Colors.black),
+                              decoration:
+                                  const BoxDecoration(color: Colors.black),
                               child: Padding(
                                 padding: EdgeInsets.symmetric(horizontal: 30.w),
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                       'TOTAL',
@@ -163,8 +180,10 @@ class CartScreen extends StatelessWidget {
                   ],
                 ),
               );
-            }else {
-              return Center(child: const Text('Something Went Wrong'),);
+            } else {
+              return Center(
+                child: const Text('Something Went Wrong'),
+              );
             }
           },
         ));

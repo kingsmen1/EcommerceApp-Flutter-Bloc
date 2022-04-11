@@ -5,6 +5,21 @@ class Cart extends Equatable {
   final List<Product> products;
   const Cart({this.products = const <Product>[]});
 
+  @override
+  List<Object?> get props => [products];
+
+  Map productQuantity(products){
+    var quantity = {};
+    products.forEach((product){
+      if(!quantity.containsKey(product)){
+        quantity[product] = 1;
+      }else{
+        quantity[product] +=1;
+      }
+    });
+    return quantity;
+  }
+
   double get subtotalD {
     return products.fold(
         0, (previousValue, element) => previousValue + element.price);
@@ -51,7 +66,5 @@ class Cart extends Equatable {
 
 
 
-  @override
-  // TODO: implement props
-  List<Object?> get props => [products];
+
 }
