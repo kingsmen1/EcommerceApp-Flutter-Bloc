@@ -1,5 +1,7 @@
+import 'package:block_eccomerce_app/blocs/cart/cart_bloc.dart';
 import 'package:block_eccomerce_app/blocs/wishlist/wishlist_bloc.dart';
 import 'package:block_eccomerce_app/models/models.dart';
+import 'package:block_eccomerce_app/screens/cart/cart_screen.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:block_eccomerce_app/widgets/widgets.dart';
@@ -48,13 +50,20 @@ class ProductScreen extends StatelessWidget {
                       ));
                 },
               ),
-              ElevatedButton(
-                  style: ElevatedButton.styleFrom(primary: Colors.white),
-                  onPressed: () {},
-                  child: Text(
-                    'Add To Cart',
-                    style: Theme.of(context).textTheme.headline3,
-                  ))
+              BlocBuilder<CartBloc, CartState>(
+                builder: (context, state) {
+                  return ElevatedButton(
+                      style: ElevatedButton.styleFrom(primary: Colors.white),
+                      onPressed: () {
+                        context.read<CartBloc>().add(AddProduct(product));
+                            Navigator.pushNamed(context, CartScreen.routeName);
+                      },
+                      child: Text(
+                        'Add To Cart',
+                        style: Theme.of(context).textTheme.headline3,
+                      ));
+                },
+              )
             ],
           ),
         ),

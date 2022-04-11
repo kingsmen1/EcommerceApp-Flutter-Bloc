@@ -1,4 +1,5 @@
 import 'package:block_eccomerce_app/blocs/blocs.dart';
+import 'package:block_eccomerce_app/blocs/cart/cart_bloc.dart';
 import 'package:block_eccomerce_app/screens/product/products_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,27 +7,32 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../models/models.dart';
 
-
 class ProductCard extends StatelessWidget {
   final Product product;
   final double widthFactor;
   final double leftPosition;
   final bool isWishList;
+
   const ProductCard({
-    Key? key,required this.product,  this.widthFactor = 2.5, this.leftPosition = 5, this.isWishList= false ,
+    Key? key,
+    required this.product,
+    this.widthFactor = 2.5,
+    this.leftPosition = 5,
+    this.isWishList = false,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final double widthValue = MediaQuery.of(context).size.width / widthFactor;
     return InkWell(
-      onTap: (){
-        Navigator.pushNamed(context, ProductScreen.routeName , arguments: product);
+      onTap: () {
+        Navigator.pushNamed(context, ProductScreen.routeName,
+            arguments: product);
       },
       child: Stack(
         children: [
           Container(
-            width:widthValue,
+            width: widthValue,
             height: 150.h,
             child: Image.network(
               product.imageUrl,
@@ -35,18 +41,17 @@ class ProductCard extends StatelessWidget {
           ),
           Positioned(
               top: 60.h,
-              left:leftPosition ,
+              left: leftPosition,
               child: Container(
-                width:widthValue-5- leftPosition,
+                width: widthValue - 5 - leftPosition,
                 height: 80.h,
-                decoration:
-                BoxDecoration(color: Colors.black.withAlpha(50)),
+                decoration: BoxDecoration(color: Colors.black.withAlpha(50)),
               )),
           Positioned(
             top: 65.h,
             left: leftPosition + 5.w,
             child: Container(
-              width: widthValue - 15 -leftPosition,
+              width: widthValue - 15 - leftPosition,
               height: 70.h,
               decoration: const BoxDecoration(color: Colors.black),
               child: Padding(
@@ -76,26 +81,49 @@ class ProductCard extends StatelessWidget {
                         ],
                       ),
                     ),
-                    Expanded(
-                        child: IconButton(
-                            onPressed: () {},
-                            icon: const Icon(
-                              Icons.add_circle,
-                              color: Colors.white,
-                            ))),
-                    isWishList?
-                    Expanded(
-                        child: IconButton(
-                            onPressed: () {
-                              context.read<WishlistBloc>().add(RemoveProductFromWishList(product));
-                              const snackBar = SnackBar(content: Text('Removed from your Wishlist'),
-                                  duration: Duration(milliseconds: 300));
-                              ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                            },
-                            icon: const Icon(
-                              Icons.delete,
-                              color: Colors.white,
-                            ))):const SizedBox()
+                    BlocBuilder<CartBloc, CartState>(
+                      builder: (context, state) {
+                        if (state is CartLoading) {
+                          return Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
+                        if (state is CartLoaded) {
+                          return Expanded(
+                              child: IconButton(
+                                  onPressed: () {
+                                    context.read<CartBloc>().add(AddProduct(product));
+                                  },
+                                  icon: const Icon(
+                                    Icons.add_circle,
+                                    color: Colors.white,
+                                  )));
+                        } else {
+                          return Center(
+                            child: Text('Something Went Wrong'),
+                          );
+                        }
+                      },
+                    ),
+                    isWishList
+                        ? Expanded(
+                            child: IconButton(
+                                onPressed: () {
+                                  context
+                                      .read<WishlistBloc>()
+                                      .add(RemoveProductFromWishList(product));
+                                  const snackBar = SnackBar(
+                                      content:
+                                          Text('Removed from your Wishlist'),
+                                      duration: Duration(milliseconds: 300));
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(snackBar);
+                                },
+                                icon: const Icon(
+                                  Icons.delete,
+                                  color: Colors.white,
+                                )))
+                        : const SizedBox()
                   ],
                 ),
               ),

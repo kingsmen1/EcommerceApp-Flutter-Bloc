@@ -1,3 +1,4 @@
+import 'package:block_eccomerce_app/blocs/cart/cart_bloc.dart';
 import 'package:block_eccomerce_app/blocs/wishlist/wishlist_bloc.dart';
 import 'package:block_eccomerce_app/config/routes.dart';
 import 'package:block_eccomerce_app/config/theme.dart';
@@ -18,22 +19,21 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: const Size(390 ,844),
-      builder:()=> MultiBlocProvider(
-        providers: [BlocProvider(create: (_)=> WishlistBloc()..add(LoadWishList()))],
+      designSize: const Size(390, 844),
+      builder: () => MultiBlocProvider(
+        providers: [
+          BlocProvider(create: (_) => WishlistBloc()..add(LoadWishList())),
+          BlocProvider(create: (_) => CartBloc()..add(LoadCart()))
+        ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Flutter Demo',
           theme: theme(),
           initialRoute: HomeScreen.routeName,
           routes: routes,
-          home:   HomeScreen(),
+          home: HomeScreen(),
         ),
       ),
     );
   }
 }
-
-
-
-
