@@ -84,15 +84,21 @@ class ProductCard extends StatelessWidget {
                     BlocBuilder<CartBloc, CartState>(
                       builder: (context, state) {
                         if (state is CartLoading) {
-                          return Center(
-                            child: CircularProgressIndicator(),
+                          return Expanded(
+                            child:  Center(
+                              child: CircularProgressIndicator(
+                                color: Colors.white,
+                              ),
+                            ),
                           );
                         }
                         if (state is CartLoaded) {
                           return Expanded(
                               child: IconButton(
                                   onPressed: () {
-                                    context.read<CartBloc>().add(AddProduct(product));
+                                    context
+                                        .read<CartBloc>()
+                                        .add(AddProduct(product));
                                   },
                                   icon: const Icon(
                                     Icons.add_circle,

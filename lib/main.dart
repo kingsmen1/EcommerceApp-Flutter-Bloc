@@ -3,6 +3,7 @@ import 'package:block_eccomerce_app/blocs/wishlist/wishlist_bloc.dart';
 import 'package:block_eccomerce_app/config/routes.dart';
 import 'package:block_eccomerce_app/config/theme.dart';
 import 'package:block_eccomerce_app/screens/home/home_screen.dart';
+import 'package:block_eccomerce_app/screens/splash/splash_screen.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -29,9 +30,9 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'Flutter Demo',
           theme: theme(),
-          initialRoute: HomeScreen.routeName,
+          initialRoute: SplashScreen.routeName,
           routes: routes,
-          home: HomeScreen(),
+          // home: HomeScreen(),
         ),
       ),
     );
