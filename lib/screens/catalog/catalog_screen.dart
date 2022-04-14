@@ -19,7 +19,7 @@ class CatalogScreen extends StatelessWidget {
     final List<Product> categoryProducts = Product.products.where((element) => element.category == category.name).toList();
     return Scaffold(
         appBar: CustomAppBar(title: category.name),
-        bottomNavigationBar:  CustomNavBar(),
+        bottomNavigationBar:  CustomNavBar(screen: "/home_screen"),
         body: GridView.builder(
             padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 16.0.h),
             itemCount: categoryProducts.length,

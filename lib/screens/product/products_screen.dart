@@ -22,52 +22,7 @@ class ProductScreen extends StatelessWidget {
         child: Container(
           color: Colors.black,
           height: 70.h,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              IconButton(
-                  onPressed: () {},
-                  icon: Icon(
-                    Icons.share,
-                    color: Colors.white,
-                  )),
-              BlocBuilder<WishlistBloc, WishlistState>(
-                builder: (context, state) {
-                  return IconButton(
-                      onPressed: () {
-                        context
-                            .read<WishlistBloc>()
-                            .add(AddProductToWishList(product));
-                        const snackBar = SnackBar(
-                          content: Text('Added to your Wishlist'),
-                          duration: Duration(milliseconds: 300),
-                        );
-                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                      },
-                      icon: const Icon(
-                        Icons.favorite,
-                        color: Colors.white,
-                      ));
-                },
-              ),
-              BlocBuilder<CartBloc, CartState>(
-                builder: (context, state) {
-                  return ElevatedButton(
-                      style: ElevatedButton.styleFrom(primary: Colors.white),
-                      onPressed: () {
-                        context.read<CartBloc>().add(AddProduct(product));
-                            Navigator.pushNamed(context, CartScreen.routeName);
-                      },
-                      child: Text(
-                        'Add To Cart',
-                        style: Theme.of(context).textTheme.headline3,
-                      ));
-                },
-              )
-            ],
-          ),
-        ),
-      ),
+          child:  CustomNavBar(screen: "/Products" ,  product: product),),),
       body: ListView(
         children: [
           CarouselSlider(

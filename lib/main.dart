@@ -4,7 +4,8 @@ import 'package:block_eccomerce_app/blocs/product/product_bloc.dart';
 import 'package:block_eccomerce_app/blocs/wishlist/wishlist_bloc.dart';
 import 'package:block_eccomerce_app/config/routes.dart';
 import 'package:block_eccomerce_app/config/theme.dart';
-import 'package:block_eccomerce_app/screens/splash/splash_screen.dart';
+import 'package:block_eccomerce_app/screens/checkout/checkout_screen.dart';
+import 'package:block_eccomerce_app/screens/home/home_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -43,7 +44,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'Flutter Demo',
           theme: theme(),
-          initialRoute: SplashScreen.routeName,
+          initialRoute: HomeScreen.routeName,
           routes: routes,
         ),
       ),

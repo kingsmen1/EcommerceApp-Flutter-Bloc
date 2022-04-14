@@ -15,7 +15,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: const CustomAppBar(title: 'Zero to  Unicorn'),
-        bottomNavigationBar: const CustomNavBar(),
+        bottomNavigationBar:  CustomNavBar(screen: '/home_screen'),
         body: ListView(
           children: [
             BlocBuilder<CategoryBloc, CategoryState>(
