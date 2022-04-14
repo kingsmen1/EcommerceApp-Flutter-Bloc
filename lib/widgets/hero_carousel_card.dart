@@ -8,7 +8,7 @@ import '../models/models.dart';
 class HeroCarouselCard extends StatelessWidget {
 
   final Product? product;
-  final Category? category;
+  final Categoryy? category;
   const HeroCarouselCard({Key? key, this.category, this.product}) : super(key: key);
 
   @override

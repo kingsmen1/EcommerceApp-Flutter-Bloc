@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../constants.dart';
 import '../models/models.dart';
 
 class ProductCard extends StatelessWidget {
@@ -106,7 +107,7 @@ class ProductCard extends StatelessWidget {
                                   )));
                         } else {
                           return Center(
-                            child: Text('Something Went Wrong'),
+                            child: Text(error),
                           );
                         }
                       },

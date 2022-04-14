@@ -15,7 +15,7 @@ class CatalogScreen extends StatelessWidget {
     final category = ModalRoute
         .of(context)
         ?.settings
-        .arguments as Category;
+        .arguments as Categoryy;
     final List<Product> categoryProducts = Product.products.where((element) => element.category == category.name).toList();
     return Scaffold(
         appBar: CustomAppBar(title: category.name),

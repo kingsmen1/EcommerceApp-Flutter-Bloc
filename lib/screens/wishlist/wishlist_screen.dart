@@ -6,6 +6,8 @@ import 'package:block_eccomerce_app/widgets/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../constants.dart';
+
 class WishlistScreen extends StatelessWidget {
   const WishlistScreen({Key? key}) : super(key: key);
 
@@ -36,7 +38,7 @@ class WishlistScreen extends StatelessWidget {
                    ));
                  });
           } else{
-             return const Text('Something Went Wrong ');
+             return const Text(error);
            }
         },
       ),

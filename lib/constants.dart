@@ -1,0 +1,1 @@
+const  String error  = "Something Went Wrong";
