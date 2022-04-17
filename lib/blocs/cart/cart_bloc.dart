@@ -20,7 +20,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     emit(CartLoading());
     try {
       await Future<void>.delayed(const Duration(seconds: 1));
-      emit(CartLoaded());
+      emit(const CartLoaded());
     } on Exception {
       emit(CartError());
     }

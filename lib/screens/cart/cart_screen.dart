@@ -19,9 +19,7 @@ class CartScreen extends StatelessWidget {
         body: BlocBuilder<CartBloc, CartState>(
           builder: (context, state) {
             if (state is CartLoading) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
+              return loading();
             }
             if (state is CartLoaded) {
               return Padding(
@@ -79,14 +77,12 @@ class CartScreen extends StatelessWidget {
                                     ))),
                       ],
                     ),
-                    OrderSummary(),
+                     OrderSummary(),
                   ],
                 ),
               );
             } else {
-              return Center(
-                child: const Text(error),
-              );
+              return error();
             }
           },
         ));

@@ -107,7 +107,7 @@ class ProductCard extends StatelessWidget {
                                   )));
                         } else {
                           return Center(
-                            child: Text(error),
+                            child: error(),
                           );
                         }
                       },

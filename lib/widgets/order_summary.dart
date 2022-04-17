@@ -88,7 +88,7 @@ class OrderSummary extends StatelessWidget {
       );
     }
     else{
-      return const Text(error);
+      return  error();
     }
   },
 );

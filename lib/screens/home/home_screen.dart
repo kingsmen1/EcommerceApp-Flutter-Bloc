@@ -15,15 +15,13 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: const CustomAppBar(title: 'Zero to  Unicorn'),
-        bottomNavigationBar:  CustomNavBar(screen: '/home_screen'),
+        bottomNavigationBar: CustomNavBar(screen: '/home_screen'),
         body: ListView(
           children: [
             BlocBuilder<CategoryBloc, CategoryState>(
               builder: (context, state) {
                 if (state is CategoryLoading) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
+                  return loading();
                 }
                 if (state is CategoryLoaded) {
                   return CarouselSlider(
@@ -41,7 +39,7 @@ class HomeScreen extends StatelessWidget {
                         .toList(),
                   );
                 } else {
-                  return const Text(error);
+                  return error();
                 }
               },
             ),
@@ -51,7 +49,7 @@ class HomeScreen extends StatelessWidget {
             BlocBuilder<ProductBloc, ProductState>(
               builder: (context, state) {
                 if (state is ProductLoading) {
-                  return const Center(child: CircularProgressIndicator());
+                  return loading();
                 }
                 if (state is ProductLoaded) {
                   return ProductCarousel(
@@ -59,7 +57,7 @@ class HomeScreen extends StatelessWidget {
                           .where((element) => element.isRecommended)
                           .toList());
                 } else {
-                  return const Text(error);
+                  return error();
                 }
               },
             ),
@@ -68,7 +66,7 @@ class HomeScreen extends StatelessWidget {
             ),
             BlocBuilder<ProductBloc, ProductState>(builder: (context, state) {
               if (state is ProductLoading) {
-                return const Center(child: CircularProgressIndicator());
+                return loading();
               }
               if (state is ProductLoaded) {
                 return ProductCarousel(
@@ -76,9 +74,7 @@ class HomeScreen extends StatelessWidget {
                         .where((element) => element.isPopular)
                         .toList());
               } else {
-                return const Center(
-                  child: Text(error),
-                );
+                return error();
               }
             }),
           ],

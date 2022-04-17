@@ -1,3 +1,5 @@
+import 'package:block_eccomerce_app/blocs/checkout/checkout_bloc.dart';
+import 'package:block_eccomerce_app/constants.dart';
 import 'package:block_eccomerce_app/screens/checkout/checkout_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -11,7 +13,7 @@ class CustomNavBar extends StatelessWidget {
   final String screen;
   final Product? product;
 
-  CustomNavBar({required this.screen, this.product  }) ;
+  CustomNavBar({required this.screen, this.product});
 
   @override
   Widget build(BuildContext context) {
@@ -21,9 +23,13 @@ class CustomNavBar extends StatelessWidget {
           height: 70.h,
           child: (screen == '/home_screen')
               ? HomeNavBar()
-              : (screen== '/Products')?AddToCartNavBar(
-                  product: product!,
-                ):(screen== '/Cart_screen')?GoToCheckOutNavBar():OrderNowNavBar()),
+              : (screen == '/Products')
+                  ? AddToCartNavBar(
+                      product: product!,
+                    )
+                  : (screen == '/Cart_screen')
+                      ? GoToCheckOutNavBar()
+                      : OrderNowNavBar()),
     );
   }
 }
@@ -125,19 +131,19 @@ class GoToCheckOutNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            ElevatedButton(
-                style: ElevatedButton.styleFrom(primary: Colors.white),
-                onPressed: () {
-                  Navigator.pushNamed(context, CheckOutScreen.routeName);
-                },
-                child: Text(
-                  'GO TO CHECKOUT',
-                  style: Theme.of(context).textTheme.headline3,
-                ))
-          ],
-        );
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        ElevatedButton(
+            style: ElevatedButton.styleFrom(primary: Colors.white),
+            onPressed: () {
+              Navigator.pushNamed(context, CheckOutScreen.routeName);
+            },
+            child: Text(
+              'GO TO CHECKOUT',
+              style: Theme.of(context).textTheme.headline3,
+            ))
+      ],
+    );
   }
 }
 
@@ -146,18 +152,30 @@ class OrderNowNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        ElevatedButton(
-            style: ElevatedButton.styleFrom(primary: Colors.white),
-            onPressed: () {},
-            child: Text(
-              'ORDER NOW',
-              style: Theme.of(context).textTheme.headline3,
-            ))
-      ],
+    return BlocBuilder<CheckoutBloc, CheckoutState>(
+      builder: (context, state) {
+        if (state is CheckoutLoading) {
+          return loading();
+        }
+        if (state is CheckoutLoaded) {
+          return Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              ElevatedButton(
+                  style: ElevatedButton.styleFrom(primary: Colors.white),
+                  onPressed: () {
+                    context.read<CheckoutBloc>().add(ConfirmCheckout(checkout: state.checkout));
+                  },
+                  child: Text(
+                    'ORDER NOW',
+                    style: Theme.of(context).textTheme.headline3,
+                  ))
+            ],
+          );
+        } else {
+          return error();
+        }
+      },
     );
   }
 }
-
