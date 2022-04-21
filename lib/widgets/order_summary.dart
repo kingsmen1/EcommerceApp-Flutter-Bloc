@@ -12,7 +12,7 @@ class OrderSummary extends StatelessWidget {
     return BlocBuilder<CartBloc, CartState>(
   builder: (context, state) {
     if(state is CartLoading){
-      return Center(child: CircularProgressIndicator(),);
+      return loading();
     }
     if(state is CartLoaded){
       return Column(

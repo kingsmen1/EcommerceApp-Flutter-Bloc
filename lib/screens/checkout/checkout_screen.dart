@@ -1,27 +1,27 @@
 import 'package:block_eccomerce_app/blocs/checkout/checkout_bloc.dart';
 import 'package:block_eccomerce_app/constants.dart';
-import 'package:block_eccomerce_app/widgets/custom_appbar.dart';
-import 'package:block_eccomerce_app/widgets/custom_navbar.dart';
-import 'package:block_eccomerce_app/widgets/order_summary.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class CheckOutScreen extends StatelessWidget {
+import '../../widgets/widgets.dart';
+
+class CheckOutScreen extends StatefulWidget {
   static String routeName = "/checkOut";
 
   const CheckOutScreen({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    // final TextEditingController emailController = TextEditingController();
-    // final TextEditingController nameController = TextEditingController();
-    // final TextEditingController addressController = TextEditingController();
-    // final TextEditingController cityController = TextEditingController();
-    // final TextEditingController countryController = TextEditingController();
-    // final TextEditingController zipCodeController = TextEditingController();
+  State<CheckOutScreen> createState() => _CheckOutScreenState();
+}
 
+class _CheckOutScreenState extends State<CheckOutScreen> {
+
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: const CustomAppBar(title: 'CheckOut'),
       bottomNavigationBar: CustomNavBar(screen: "/checkOut"),
       body: Padding(
@@ -40,12 +40,12 @@ class CheckOutScreen extends StatelessWidget {
                     'CUSTOMER INFORMATION',
                     style: Theme.of(context).textTheme.headline3,
                   ),
-                  _buildTextFormField((value) {
+                  _buildTextFormField( (value) {
                     context
                         .read<CheckoutBloc>()
-                        .add(UpdateCheckout(email: value));
-                  }, context, 'Email'),
-                  _buildTextFormField((value) {
+                        .add(UpdateCheckout(email: value));}
+                   , context, 'Email'),
+                  _buildTextFormField( (value) {
                     context
                         .read<CheckoutBloc>()
                         .add(UpdateCheckout(fullName: value));
@@ -54,22 +54,22 @@ class CheckOutScreen extends StatelessWidget {
                     'DELIVERY INFORMATION',
                     style: Theme.of(context).textTheme.headline3,
                   ),
-                  _buildTextFormField((value) {
+                  _buildTextFormField( (value) {
                     context
                         .read<CheckoutBloc>()
                         .add(UpdateCheckout(address: value));
                   }, context, 'Address'),
-                  _buildTextFormField((value) {
+                  _buildTextFormField( (value) {
                     context
                         .read<CheckoutBloc>()
                         .add(UpdateCheckout(city: value));
                   }, context, 'City'),
-                  _buildTextFormField((value) {
+                  _buildTextFormField( (value) {
                     context
                         .read<CheckoutBloc>()
                         .add(UpdateCheckout(country: value));
                   }, context, 'Country'),
-                  _buildTextFormField((value) {
+                  _buildTextFormField( (value) {
                     context
                         .read<CheckoutBloc>()
                         .add(UpdateCheckout(zipCode: value));
@@ -78,7 +78,7 @@ class CheckOutScreen extends StatelessWidget {
                     'ORDER SUMMARY',
                     style: Theme.of(context).textTheme.headline3,
                   ),
-                  OrderSummary(),
+                  const OrderSummary(),
                 ],
               );
             } else {
@@ -90,8 +90,8 @@ class CheckOutScreen extends StatelessWidget {
     );
   }
 
-  Padding _buildTextFormField(
-      Function(String)? onChanged, BuildContext context, String labelText) {
+  Padding _buildTextFormField( Function(String)? onChanged,
+      BuildContext context, String labelText) {
     return Padding(
       padding: EdgeInsets.all(8.w),
       child: Row(

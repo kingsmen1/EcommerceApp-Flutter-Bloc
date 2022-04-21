@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class CustomAppBar extends StatelessWidget with PreferredSizeWidget{
 
   final String title;
-  const CustomAppBar({
+  const CustomAppBar( {
     Key? key,required this.title
   }) : super(key: key);
 
@@ -38,5 +38,5 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget{
 
   @override
   // TODO: implement preferredSize
-  Size get preferredSize => Size.fromHeight(50);
+  Size get preferredSize => const Size.fromHeight(50);
 }

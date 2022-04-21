@@ -1,6 +1,6 @@
-import 'package:block_eccomerce_app/blocs/checkout/checkout_bloc.dart';
 import 'package:block_eccomerce_app/constants.dart';
 import 'package:block_eccomerce_app/screens/checkout/checkout_screen.dart';
+import 'package:block_eccomerce_app/screens/order_confirmation/order_confirmation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -13,23 +13,23 @@ class CustomNavBar extends StatelessWidget {
   final String screen;
   final Product? product;
 
-  CustomNavBar({required this.screen, this.product});
+  const CustomNavBar({required this.screen, this.product});
 
   @override
   Widget build(BuildContext context) {
     return BottomAppBar(
       color: Colors.black,
-      child: Container(
+      child: SizedBox(
           height: 70.h,
-          child: (screen == '/home_screen')
-              ? HomeNavBar()
+          child: (screen == '/checkOut')
+              ? const OrderNowNavBar()
               : (screen == '/Products')
                   ? AddToCartNavBar(
                       product: product!,
                     )
                   : (screen == '/Cart_screen')
-                      ? GoToCheckOutNavBar()
-                      : OrderNowNavBar()),
+                      ? const GoToCheckOutNavBar()
+                      : const HomeNavBar()),
     );
   }
 }
@@ -44,7 +44,7 @@ class HomeNavBar extends StatelessWidget {
       children: [
         IconButton(
             onPressed: () {
-              Navigator.pop(context, HomeScreen.routeName);
+              Navigator.popAndPushNamed(context, HomeScreen.routeName);
             },
             icon: const Icon(
               Icons.home_filled,
@@ -83,7 +83,7 @@ class AddToCartNavBar extends StatelessWidget {
       children: [
         IconButton(
             onPressed: () {},
-            icon: Icon(
+            icon: const Icon(
               Icons.share,
               color: Colors.white,
             )),
@@ -165,6 +165,8 @@ class OrderNowNavBar extends StatelessWidget {
                   style: ElevatedButton.styleFrom(primary: Colors.white),
                   onPressed: () {
                     context.read<CheckoutBloc>().add(ConfirmCheckout(checkout: state.checkout));
+                    Navigator.pushNamed(context, OrderConfirmation.routeName);
+
                   },
                   child: Text(
                     'ORDER NOW',

@@ -1,20 +1,14 @@
-import 'package:block_eccomerce_app/blocs/cart/cart_bloc.dart';
-import 'package:block_eccomerce_app/blocs/category/category_bloc.dart';
-import 'package:block_eccomerce_app/blocs/checkout/checkout_bloc.dart';
-import 'package:block_eccomerce_app/blocs/product/product_bloc.dart';
-import 'package:block_eccomerce_app/blocs/wishlist/wishlist_bloc.dart';
 import 'package:block_eccomerce_app/config/routes.dart';
 import 'package:block_eccomerce_app/config/theme.dart';
-import 'package:block_eccomerce_app/repositories/checkout/checkout_repository.dart';
-import 'package:block_eccomerce_app/screens/checkout/checkout_screen.dart';
-import 'package:block_eccomerce_app/screens/home/home_screen.dart';
-import 'package:block_eccomerce_app/screens/splash/splash_screen.dart';
+import 'package:block_eccomerce_app/screens/order_confirmation/order_confirmation.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import 'blocs/blocs.dart';
 import 'repositories/repoExpo.dart';
+import 'screens/screens.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized(); //app initializing

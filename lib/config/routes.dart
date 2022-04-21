@@ -2,6 +2,7 @@ import 'package:block_eccomerce_app/screens/cart/cart_screen.dart';
 import 'package:block_eccomerce_app/screens/catalog/catalog_screen.dart';
 import 'package:block_eccomerce_app/screens/checkout/checkout_screen.dart';
 import 'package:block_eccomerce_app/screens/home/home_screen.dart';
+import 'package:block_eccomerce_app/screens/order_confirmation/order_confirmation.dart';
 import 'package:block_eccomerce_app/screens/product/products_screen.dart';
 import 'package:block_eccomerce_app/screens/splash/splash_screen.dart';
 import 'package:block_eccomerce_app/screens/wishlist/wishlist_screen.dart';
@@ -15,4 +16,5 @@ final Map<String, WidgetBuilder> routes = {
   CatalogScreen.routeName:(ctx)=> const CatalogScreen(),
   SplashScreen.routeName:(ctx)=> const SplashScreen(),
   CheckOutScreen.routeName:(ctx)=> const CheckOutScreen(),
+  OrderConfirmation.routeName:(ctx)=> const OrderConfirmation(),
 };
