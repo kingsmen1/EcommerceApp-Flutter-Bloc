@@ -1,4 +1,4 @@
-This is an Corss-Platform Ecommerce App built with help of Flutter Framework .
+This is an Corss-Platform Ecommerce App of(8-pages) built with help of Flutter Framework .
 
 
 - This app serves all the basic features which an emommerce application provides to users.
